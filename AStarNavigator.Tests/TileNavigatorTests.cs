@@ -1,4 +1,5 @@
-﻿using AStarNavigator.Algorithms;
+﻿using System.Linq;
+using AStarNavigator.Algorithms;
 using AStarNavigator.Providers;
 using Moq;
 using NUnit.Framework;
@@ -94,14 +95,8 @@ namespace AStarNavigator
 		    var to = new Tile(4000, 4000);
 
 		    var result = sut.Navigate(from, to);
+			Assert.That(result.Count(), Is.EqualTo(4000));
 
-		    //var expected = new[]
-		    //{
-			   // new Tile(0, 1),
-			   // new Tile(0, 2)
-		    //};
-
-		    //Assert.That(result, Is.EquivalentTo(expected));
 	    }
 
 	}
