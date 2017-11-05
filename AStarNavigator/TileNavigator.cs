@@ -1,4 +1,5 @@
-﻿using AStarNavigator.Algorithms;
+﻿using System;
+using AStarNavigator.Algorithms;
 using AStarNavigator.Providers;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,17 +34,23 @@ namespace AStarNavigator
 
             var path = new Dictionary<Tile, Tile>();
 
-            var gScore = new Dictionary<Tile, double>();
-            gScore[from] = 0;
+            //var gScore = new Dictionary<Tile, double>();
+            //gScore[from] = 0;
 
-            var fScore = new Dictionary<Tile, double>();
-            fScore[from] = heuristicAlgorithm.Calculate(from, to);
+            //var fScore = new Dictionary<Tile, double>();
+	        from.FScore = heuristicAlgorithm.Calculate(from, to);
 
-            while (open.Any())
-            {
-                var current = open
-                    .OrderBy(c => fScore[c])
-                    .First();
+	        Tile highScore = from;
+	        //while (open.Any())
+			while (open.Count != 0)
+			{
+				var current = highScore;
+				if(!open.Contains(current))
+				{
+					current = open
+						.OrderBy(c => c.FScore)
+						.First();
+				}
 
                 if (current.Equals(to))
                 {
@@ -60,21 +67,19 @@ namespace AStarNavigator
                         continue;
                     }
 
-                    var tentativeG = gScore[current] + distanceAlgorithm.Calculate(current, neighbor);
+                    var tentativeG = current.GScore + distanceAlgorithm.Calculate(current, neighbor);
 
-                    if (!open.Contains(neighbor))
-                    {
-                        open.Add(neighbor);
-                    }
-                    else if (tentativeG >= gScore[neighbor])
-                    {
-                        continue;
-                    }
+	                if (!open.Add(neighbor) && tentativeG >= neighbor.GScore)
+	                {
+		                continue;
+	                }
 
                     path[neighbor] = current;
 
-                    gScore[neighbor] = tentativeG;
-                    fScore[neighbor] = gScore[neighbor] + heuristicAlgorithm.Calculate(neighbor, to);
+                    neighbor.GScore = tentativeG;
+                    //fScore[neighbor] = gScore[neighbor] + heuristicAlgorithm.Calculate(neighbor, to);
+	                neighbor.FScore = neighbor.GScore + heuristicAlgorithm.Calculate(neighbor, to);
+	                if (neighbor.FScore < highScore.FScore) highScore = neighbor;
                 }
             }
 

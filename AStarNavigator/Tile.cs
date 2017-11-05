@@ -1,9 +1,11 @@
 ﻿namespace AStarNavigator
 {
-    public struct Tile
+    public class Tile
     {
 	    public readonly int X;
 	    public readonly int Y;
+	    public double FScore;
+	    public double GScore;
 
         public Tile(int x, int y)
         {

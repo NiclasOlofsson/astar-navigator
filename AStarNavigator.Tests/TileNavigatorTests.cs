@@ -91,7 +91,7 @@ namespace AStarNavigator
 		    );
 
 		    var from = new Tile(0, 0);
-		    var to = new Tile(1000, 1000);
+		    var to = new Tile(4000, 4000);
 
 		    var result = sut.Navigate(from, to);
 
