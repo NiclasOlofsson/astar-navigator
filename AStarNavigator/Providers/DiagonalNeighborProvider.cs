@@ -4,14 +4,14 @@ namespace AStarNavigator.Providers
 {
     public class DiagonalNeighborProvider : INeighborProvider
     {
-        private static readonly double[,] neighbors = new double[,]
+        private static readonly int[,] neighbors = new int[,]
         {
             { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 }, { -1, -1 }, { 1, -1 }, { 1, 1 }, { -1, 1 }
         };
 
         public IEnumerable<Tile> GetNeighbors(Tile tile)
         {
-            var result = new List<Tile>();
+            var result = new HashSet<Tile>();
 
             for (var i = 0; i < neighbors.GetLongLength(0); i++)
             {

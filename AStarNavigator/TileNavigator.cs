@@ -28,8 +28,8 @@ namespace AStarNavigator
 
         public IEnumerable<Tile> Navigate(Tile from, Tile to)
         {
-            var closed = new List<Tile>();
-            var open = new List<Tile>() { from };
+            var closed = new HashSet<Tile>();
+            var open = new HashSet<Tile>() { from };
 
             var path = new Dictionary<Tile, Tile>();
 
@@ -45,7 +45,7 @@ namespace AStarNavigator
                     .OrderBy(c => fScore[c])
                     .First();
 
-                if (current == to)
+                if (current.Equals(to))
                 {
                     return ReconstructPath(path, current);
                 }
@@ -90,10 +90,10 @@ namespace AStarNavigator
             while (path.ContainsKey(current))
             {
                 current = path[current];
-                totalPath.Add(current);
+                totalPath.Insert(0, current);
             }
 
-            totalPath.Reverse();
+            //totalPath.Reverse();
             totalPath.RemoveAt(0);
 
             return totalPath;

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MiNET.astar</id>
+    <version>$version$</version>
+    <title>MiNET.astar</title>
+	  <authors>$author$</authors>
+	  <owners>$author$</owners>
+    <licenseUrl>https://github.com/NiclasOlofsson/astar-navigator/blob/master/LICENCE.md</licenseUrl>
+    <projectUrl>https://github.com/NiclasOlofsson/astar-navigator</projectUrl>
+    <iconUrl><![CDATA[https://secure.gravatar.com/avatar/2ba5d72bdad85108d14512c4d27ea550?s=128&r=g&d=retro]]></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MiNET A* version with performance improvements for Minecraft use.</description>
+    <releaseNotes>MiNET A* version with performance improvements for Minecraft use.</releaseNotes>
+    <copyright>Wichard Riezebos; 2017 Niclas Olofsson</copyright>
+    <tags>MiNET A* astar MCPE</tags>
+  </metadata>
+</package>

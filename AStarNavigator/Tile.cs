@@ -2,22 +2,32 @@
 {
     public struct Tile
     {
-        public double X { get; private set; }
+	    public readonly int X;
+	    public readonly int Y;
 
-        public double Y { get; private set; }
-
-        public Tile(double x, double y)
+        public Tile(int x, int y)
         {
             X = x;
             Y = y;
         }
 
-        public static bool operator ==(Tile a, Tile b) => a.X == b.X && a.Y == b.Y;
+	    public bool Equals(Tile other)
+	    {
+		    return X == other.X && Y == other.Y;
+	    }
 
-        public static bool operator !=(Tile a, Tile b) => !(a == b);
+	    public override bool Equals(object obj)
+	    {
+		    if (ReferenceEquals(null, obj)) return false;
+		    return obj is Tile && Equals((Tile) obj);
+	    }
 
-        public override bool Equals(object obj) => (this == (Tile)obj);
-
-        public override int GetHashCode() => X.GetHashCode() ^ Y.GetHashCode();
+	    public override int GetHashCode()
+	    {
+		    unchecked
+		    {
+			    return (X * 397) ^ Y;
+		    }
+	    }
     }
 }

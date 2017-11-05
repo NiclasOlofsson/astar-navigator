@@ -11,7 +11,7 @@ namespace AStarNavigator
             var a = new Tile(1, 1);
             var b = new Tile(1, 1);
 
-            var result = a == b;
+            var result = a.Equals(b);
 
             Assert.That(result, Is.EqualTo(true));
         }
@@ -22,7 +22,7 @@ namespace AStarNavigator
             var a = new Tile(1, 1);
             var b = new Tile(1, 1);
 
-            var result = a != b;
+            var result = !a.Equals(b);
 
             Assert.That(result, Is.EqualTo(false));
         }

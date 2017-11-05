@@ -79,5 +79,30 @@ namespace AStarNavigator
 
             Assert.That(result, Is.EqualTo(null));
         }
-    }
+
+	    [Test]
+	    public void Navigate_PerformanceTest()
+	    {
+		    var sut = new TileNavigator(
+			    new EmptyBlockedProvider(),
+			    new DiagonalNeighborProvider(),
+			    new PythagorasAlgorithm(),
+			    new ManhattanHeuristicAlgorithm()
+		    );
+
+		    var from = new Tile(0, 0);
+		    var to = new Tile(1000, 1000);
+
+		    var result = sut.Navigate(from, to);
+
+		    //var expected = new[]
+		    //{
+			   // new Tile(0, 1),
+			   // new Tile(0, 2)
+		    //};
+
+		    //Assert.That(result, Is.EquivalentTo(expected));
+	    }
+
+	}
 }
