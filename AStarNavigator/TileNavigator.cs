@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AStarNavigator.Algorithms;
 using AStarNavigator.Providers;
 
@@ -29,7 +30,6 @@ namespace AStarNavigator
 		{
 			var closed = new HashSet<Tile>();
 			var open = new HashSet<Tile>() {from};
-
 			var path = new Dictionary<Tile, Tile>();
 
 			from.FScore = heuristicAlgorithm.Calculate(from, to);
@@ -37,10 +37,24 @@ namespace AStarNavigator
 			int noOfAttempts = 0;
 
 			Tile highScore = from;
+			Tile last = from;
 			while (open.Count != 0)
 			{
-				var current = highScore;
-				if (current.Equals(to) || ++noOfAttempts > maxAttempts)
+				var current = last;
+				if (last != highScore)
+				{
+					current = open
+						.OrderBy(c => c.FScore)
+						.First();
+				}
+
+				last = null;
+
+				if (++noOfAttempts > maxAttempts)
+				{
+					return ReconstructPath(path, highScore);
+				}
+				if (current.Equals(to))
 				{
 					return ReconstructPath(path, current);
 				}
@@ -65,9 +79,12 @@ namespace AStarNavigator
 					path[neighbor] = current;
 
 					neighbor.GScore = tentativeG;
-					//fScore[neighbor] = gScore[neighbor] + heuristicAlgorithm.Calculate(neighbor, to);
 					neighbor.FScore = neighbor.GScore + heuristicAlgorithm.Calculate(neighbor, to);
-					if (neighbor.FScore <= highScore.FScore) highScore = neighbor;
+					if (neighbor.FScore <= highScore.FScore)
+					{
+						highScore = neighbor;
+						last = neighbor;
+					}
 				}
 			}
 
