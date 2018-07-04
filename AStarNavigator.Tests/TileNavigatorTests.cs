@@ -6,98 +6,98 @@ using NUnit.Framework;
 
 namespace AStarNavigator
 {
-    [TestFixture]
-    public class TileNavigatorTests
-    {
-        [Test]
-        public void Navigate_WhenStraightLine_ReturnsExpectedValues()
-        {
-            var sut = new TileNavigator(
-                new EmptyBlockedProvider(),
-                new DiagonalNeighborProvider(),
-                new PythagorasAlgorithm(),
-                new ManhattanHeuristicAlgorithm()
-            );
+	[TestFixture]
+	public class TileNavigatorTests
+	{
+		[Test]
+		public void Navigate_WhenStraightLine_ReturnsExpectedValues()
+		{
+			var sut = new TileNavigator(
+				new EmptyBlockedProvider(),
+				new DiagonalNeighborProvider(),
+				new PythagorasAlgorithm(),
+				new ManhattanHeuristicAlgorithm()
+			);
 
-            var from = new Tile(0, 0);
-            var to = new Tile(0, 2);
+			var from = new Tile(0, 0);
+			var to = new Tile(0, 2);
 
-            var result = sut.Navigate(from, to);
+			var result = sut.Navigate(from, to);
 
-            var expected = new[]
-            {
-                new Tile(0, 1),
-                new Tile(0, 2)
-            };
+			var expected = new[]
+			{
+				new Tile(0, 1),
+				new Tile(0, 2)
+			};
 
-            Assert.That(result, Is.EquivalentTo(expected));
-        }
+			Assert.That(result, Is.EquivalentTo(expected));
+		}
 
-        [Test]
-        public void Navigate_WhenDiagonal_ReturnsExpectedValues()
-        {
-            var sut = new TileNavigator(
-                new EmptyBlockedProvider(),
-                new DiagonalNeighborProvider(),
-                new PythagorasAlgorithm(),
-                new ManhattanHeuristicAlgorithm()
-            );
+		[Test]
+		public void Navigate_WhenDiagonal_ReturnsExpectedValues()
+		{
+			var sut = new TileNavigator(
+				new EmptyBlockedProvider(),
+				new DiagonalNeighborProvider(),
+				new PythagorasAlgorithm(),
+				new ManhattanHeuristicAlgorithm()
+			);
 
-            var from = new Tile(0, 0);
-            var to = new Tile(2, 2);
+			var from = new Tile(0, 0);
+			var to = new Tile(2, 2);
 
-            var result = sut.Navigate(from, to);
+			var result = sut.Navigate(from, to);
 
-            var expected = new[]
-            {
-                new Tile(1, 1),
-                new Tile(2, 2)
-            };
+			var expected = new[]
+			{
+				new Tile(1, 1),
+				new Tile(2, 2)
+			};
 
-            Assert.That(result, Is.EquivalentTo(expected));
-        }
+			Assert.That(result, Is.EquivalentTo(expected));
+		}
 
-        [Test]
-        public void Navigate_WhenRouteIsBlocked_ReturnsNull()
-        {
-            var blockedMock = new Mock<IBlockedProvider>();
+		[Test]
+		public void Navigate_WhenRouteIsBlocked_ReturnsNull()
+		{
+			var blockedMock = new Mock<IBlockedProvider>();
 
-            blockedMock
-                .Setup(m => m.IsBlocked(It.IsAny<Tile>()))
-                .Returns(true);
+			blockedMock
+				.Setup(m => m.IsBlocked(It.IsAny<Tile>()))
+				.Returns(true);
 
-            var sut = new TileNavigator(
-                blockedMock.Object,
-                new DiagonalNeighborProvider(),
-                new PythagorasAlgorithm(),
-                new ManhattanHeuristicAlgorithm()
-            );
+			var sut = new TileNavigator(
+				blockedMock.Object,
+				new DiagonalNeighborProvider(),
+				new PythagorasAlgorithm(),
+				new ManhattanHeuristicAlgorithm()
+			);
 
-            var from = new Tile(0, 0);
-            var to = new Tile(2, 2);
+			var from = new Tile(0, 0);
+			var to = new Tile(2, 2);
 
-            var result = sut.Navigate(from, to);
+			var result = sut.Navigate(from, to);
 
-            Assert.That(result, Is.EqualTo(null));
-        }
+			Assert.That(result, Is.EqualTo(null));
+		}
 
-	    [Test]
-	    public void Navigate_PerformanceTest()
-	    {
-		    var sut = new TileNavigator(
-			    new EmptyBlockedProvider(),
-			    new DiagonalNeighborProvider(),
-			    new PythagorasAlgorithm(),
-			    new ManhattanHeuristicAlgorithm()
-		    );
+		[Test]
+		public void Navigate_PerformanceTest()
+		{
+			var sut = new TileNavigator(
+				new EmptyBlockedProvider(),
+				new DiagonalNeighborProvider(),
+				new PythagorasAlgorithm(),
+				new ManhattanHeuristicAlgorithm()
+			);
 
-		    var from = new Tile(0, 0);
-		    var to = new Tile(4000, 4000);
+			var from = new Tile(0, 0);
+			var to = new Tile(4000, 4000);
 
-		    var result = sut.Navigate(from, to);
+			var result = sut.Navigate(from, to);
 			Assert.That(result.Count(), Is.EqualTo(4000));
 
-	    }
+		}
 
 	}
 }

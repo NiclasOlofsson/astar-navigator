@@ -1,67 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94738466-A026-444D-B318-24A78723FEC0}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AStarNavigator</RootNamespace>
-    <AssemblyName>AStarNavigator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Algorithms\IDistanceAlgorithm.cs" />
-    <Compile Include="Algorithms\ManhattanHeuristicAlgorithm.cs" />
-    <Compile Include="ITileNavigator.cs" />
-    <Compile Include="Providers\EmptyBlockedProvider.cs" />
-    <Compile Include="Providers\IBlockedProvider.cs" />
-    <Compile Include="Providers\INeighborProvider.cs" />
-    <Compile Include="Providers\DiagonalNeighborProvider.cs" />
-    <Compile Include="Algorithms\PythagorasAlgorithm.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="TileNavigator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="AStarNavigator.nuspec" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>MiNET.astar</PackageId>
+		<Version>0.0.0</Version>
+		<Authors>gurun</Authors>
+		<Company>Niclas Olofsson</Company>
+		<Description>MiNET A* version with performance improvements for Minecraft use.</Description>
+		<Copyright>Wichard Riezebos; 2017-2018 Niclas Olofsson</Copyright>
+		<PackageLicenseUrl>https://github.com/NiclasOlofsson/astar-navigator/blob/master/LICENCE.md</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/NiclasOlofsson/astar-navigator</PackageProjectUrl>
+		<PackageIconUrl><![CDATA[https://secure.gravatar.com/avatar/2ba5d72bdad85108d14512c4d27ea550?s=128&r=g&d=retro]]></PackageIconUrl>
+		<PackageTags>MiNET A* astar MCPE</PackageTags>
+		<FileVersion>1.0.0.0</FileVersion>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<NoWarn>1701;1702;1701</NoWarn>
+	</PropertyGroup>
+
 </Project>
